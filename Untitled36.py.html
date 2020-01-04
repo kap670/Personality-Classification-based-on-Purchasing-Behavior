@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[74]:
+
+
+import pandas as pd 
+import numpy as np 
+
+
+# In[75]:
+
+
+xls = pd.ExcelFile('Spend.xlsx')
+df1 = pd.read_excel(xls, 'Sheet2')
+
+
+# In[99]:
+
+
+df1.dropna(inplace = True)
+df1['DA']= abs(df1['DA'])
+df1
+
+
+# In[102]:
+
+
+df1['CTR_State'] = df1['CTR'].str[0:2]
+df1['CTR_SpendCode'] = df1['CTR'].str[2:7]
+df1['CTR_C'] = df1['CTR'].str[8:]
+
+df2 = df1[(df1['CTR_State']=='NY') & (df1['CTR_C']=='Essencials')]
+df2['tax'] = 1.08875
+df2
+# df1[['CTR_State' == 'NY'][ 'CTR_C' == 'Essencials']]
+
+
+# In[ ]:
+
+
+
+
+
+# In[81]:
+
+
+df1.groupby(['CTR_State','CTR_C']).describe()
+
+
+# In[82]:
+
+
+df1.groupby(['CTR_C', 'CTR_State']).describe()
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
